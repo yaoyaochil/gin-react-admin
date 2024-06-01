@@ -1,0 +1,38 @@
+system:
+  # 服务端口
+  addr: 8800
+  #  路由全局前缀
+  router-prefix: ""
+
+mysql_system:
+  path: localhost
+  port: "3306"
+  config: charset=utf8mb4&parseTime=True&loc=Local
+  db-name: gra
+  username: root
+  password: ""
+  prefix: ""
+  singular: false
+  engine: ""
+  max-idle-conns: 10
+  max-open-conns: 100
+  log-mode: error
+  log-zap: false
+
+
+zap:
+  level: info
+  prefix: "[github.com/yaoyaochil/gin-react-admin]"
+  format: console
+  director: log
+  encode-level: LowercaseColorLevelEncoder
+  stacktrace-key: stacktrace
+  max-age: 0
+  show-line: true
+  log-in-console: true
+
+jwt:
+  signing-key: 53fff5b5-4d84-464a-bbe1-d955cd2cd714
+  expires-time: 7d
+  buffer-time: 1d
+  issuer: yaoyaochil

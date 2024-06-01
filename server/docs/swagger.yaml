@@ -1,0 +1,371 @@
+definitions:
+  request.GetMenuList:
+    properties:
+      children:
+        items:
+          $ref: '#/definitions/system.Menu'
+        type: array
+      createdAt:
+        description: 创建时间
+        type: string
+      element:
+        type: string
+      icon:
+        type: string
+      id:
+        description: 主键ID
+        type: integer
+      index:
+        type: boolean
+      keyword:
+        description: 关键字
+        type: string
+      label:
+        type: string
+      page:
+        description: 页码
+        type: integer
+      pageSize:
+        description: 每页大小
+        type: integer
+      parent:
+        $ref: '#/definitions/system.Menu'
+      parentId:
+        type: integer
+      path:
+        description: 非根路由path不要加/
+        type: string
+      updatedAt:
+        description: 更新时间
+        type: string
+      updatedBy:
+        description: 更新操作人 关联用户表
+        type: string
+    type: object
+  request.Login:
+    properties:
+      password:
+        type: string
+      username:
+        type: string
+    type: object
+  response.PageResult:
+    properties:
+      list: {}
+      page:
+        type: integer
+      pageSize:
+        type: integer
+      total:
+        type: integer
+    type: object
+  response.Response:
+    properties:
+      code:
+        type: integer
+      data: {}
+      msg:
+        type: string
+    type: object
+  system.Menu:
+    properties:
+      children:
+        items:
+          $ref: '#/definitions/system.Menu'
+        type: array
+      createdAt:
+        description: 创建时间
+        type: string
+      element:
+        type: string
+      icon:
+        type: string
+      id:
+        description: 主键ID
+        type: integer
+      index:
+        type: boolean
+      label:
+        type: string
+      parent:
+        $ref: '#/definitions/system.Menu'
+      parentId:
+        type: integer
+      path:
+        description: 非根路由path不要加/
+        type: string
+      updatedAt:
+        description: 更新时间
+        type: string
+      updatedBy:
+        description: 更新操作人 关联用户表
+        type: string
+    type: object
+info:
+  contact: {}
+  description: 使用gin+react进行极速开发的全栈开发基础平台
+  title: Gin-React-Admin Swagger API接口文档
+  version: v1.0.0
+paths:
+  /base/login:
+    post:
+      parameters:
+      - description: 用户名和密码
+        in: body
+        name: data
+        required: true
+        schema:
+          $ref: '#/definitions/request.Login'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: '{"code":200,"data":{},"msg":"登录成功"}'
+          schema:
+            type: string
+      summary: 用户登录
+      tags:
+      - 系统用户
+  /jwt/jwtInBlacklist:
+    post:
+      parameters:
+      - description: token
+        in: query
+        name: token
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: '{"code":200,"data":{},"msg":"ok"}'
+          schema:
+            type: string
+      security:
+      - ApiKeyAuth: []
+      summary: JWT鉴权
+      tags:
+      - System
+  /menu/createMenu:
+    post:
+      consumes:
+      - application/json
+      parameters:
+      - description: api路径, api中文描述, api组, 方法
+        in: body
+        name: data
+        required: true
+        schema:
+          $ref: '#/definitions/system.Menu'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: 创建成功
+          schema:
+            allOf:
+            - $ref: '#/definitions/response.Response'
+            - properties:
+                msg:
+                  type: string
+              type: object
+      security:
+      - ApiKeyAuth: []
+      summary: 创建菜单
+      tags:
+      - sys_menu
+  /menu/deleteMenuById:
+    post:
+      consumes:
+      - application/json
+      parameters:
+      - description: api路径, api中文描述, api组, 方法
+        in: body
+        name: data
+        required: true
+        schema:
+          $ref: '#/definitions/system.Menu'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: 删除成功
+          schema:
+            allOf:
+            - $ref: '#/definitions/response.Response'
+            - properties:
+                msg:
+                  type: string
+              type: object
+      security:
+      - ApiKeyAuth: []
+      summary: 根据id删除菜单
+      tags:
+      - sys_menu
+  /menu/deleteMenuByIds:
+    post:
+      consumes:
+      - application/json
+      parameters:
+      - description: api路径, api中文描述, api组, 方法
+        in: body
+        name: data
+        required: true
+        schema:
+          items:
+            type: integer
+          type: array
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: 删除成功
+          schema:
+            allOf:
+            - $ref: '#/definitions/response.Response'
+            - properties:
+                msg:
+                  type: string
+              type: object
+      security:
+      - ApiKeyAuth: []
+      summary: 批量删除菜单
+      tags:
+      - sys_menu
+  /menu/getMenuById:
+    post:
+      consumes:
+      - application/json
+      parameters:
+      - description: api路径, api中文描述, api组, 方法
+        in: body
+        name: data
+        required: true
+        schema:
+          $ref: '#/definitions/system.Menu'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: 获取成功
+          schema:
+            allOf:
+            - $ref: '#/definitions/response.Response'
+            - properties:
+                msg:
+                  type: string
+              type: object
+      security:
+      - ApiKeyAuth: []
+      summary: 获取单个菜单
+      tags:
+      - sys_menu
+  /menu/getMenuList:
+    post:
+      consumes:
+      - application/json
+      parameters:
+      - description: api路径, api中文描述, api组, 方法
+        in: body
+        name: data
+        required: true
+        schema:
+          $ref: '#/definitions/request.GetMenuList'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: 获取成功
+          schema:
+            allOf:
+            - $ref: '#/definitions/response.PageResult'
+            - properties:
+                ' Page':
+                  type: integer
+                ' PageSize':
+                  type: integer
+                ' Total':
+                  type: integer
+                List:
+                  items:
+                    type: object
+                  type: array
+              type: object
+      security:
+      - ApiKeyAuth: []
+      summary: 分页获取菜单
+      tags:
+      - sys_menu
+  /menu/updateMenuById:
+    post:
+      consumes:
+      - application/json
+      parameters:
+      - description: api路径, api中文描述, api组, 方法
+        in: body
+        name: data
+        required: true
+        schema:
+          $ref: '#/definitions/system.Menu'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: 更新成功
+          schema:
+            allOf:
+            - $ref: '#/definitions/response.Response'
+            - properties:
+                msg:
+                  type: string
+              type: object
+      security:
+      - ApiKeyAuth: []
+      summary: 根据id更新菜单
+      tags:
+      - sys_menu
+  /user/changePassword:
+    post:
+      parameters:
+      - description: 旧密码
+        in: query
+        name: oldPassword
+        required: true
+        type: string
+      - description: 新密码
+        in: query
+        name: newPassword
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: '{"code":200,"data":{},"msg":"修改成功"}'
+          schema:
+            type: string
+      security:
+      - ApiKeyAuth: []
+      summary: 修改密码
+      tags:
+      - 系统用户
+  /user/getUserInfo:
+    get:
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: '{"code":200,"data":{},"msg":"获取成功"}'
+          schema:
+            type: string
+      security:
+      - ApiKeyAuth: []
+      summary: 获取用户信息
+      tags:
+      - 系统用户
+securityDefinitions:
+  ApiKeyAuth:
+    in: header
+    name: x-token
+    type: apiKey
+swagger: "2.0"
