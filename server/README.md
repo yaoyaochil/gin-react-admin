@@ -28,7 +28,7 @@ ETO·网关服务是一个基于gin框架的网关服务，主要用于对接游
 
 ```shell
 # 配置文件 将eto.config.yaml 重命名为config.yaml 并修改配置文件为你的配置
-mv eto.config.yaml config.yaml
+mv gra.config.yaml config.yaml
 
 
 # mod 包管理
