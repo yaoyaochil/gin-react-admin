@@ -1,89 +1,16 @@
 system:
+  # 服务端口
   addr: 8800
-mysql_d_taiwan:
-  path: 127.0.0.1
-  port: "33062"
-  config: charset=latin1&parseTime=True&loc=Local
-  db-name: d_taiwan
-  username: root
-  password: "88888888"
-  prefix: ""
-  singular: false
-  engine: ""
-  max-idle-conns: 10
-  max-open-conns: 100
-  log-mode: error
-  log-zap: false
-
-mysql_taiwan_cain:
-  path: 127.0.0.1
-  port: "33062"
-  config: charset=latin1&parseTime=True&loc=Local
-  db-name: taiwan_cain
-  username: root
-  password: "88888888"
-  prefix: ""
-  singular: false
-  engine: ""
-  max-idle-conns: 10
-  max-open-conns: 100
-  log-mode: error
-  log-zap: false
-
-mysql_taiwan_cain_2nd:
-  path: 127.0.0.1
-  port: "33062"
-  config: charset=latin1&parseTime=True&loc=Local
-  db-name: taiwan_cain_2nd
-  username: root
-  password: "88888888"
-  prefix: ""
-  singular: false
-  engine: ""
-  max-idle-conns: 10
-  max-open-conns: 100
-  log-mode: error
-  log-zap: false
-
-
-mysql_taiwan_login:
-  path: 127.0.0.1
-  port: "33062"
-  config: charset=utf8&parseTime=True&loc=Local
-  db-name: taiwan_login
-  username: root
-  password: "88888888"
-  prefix: ""
-  singular: false
-  engine: ""
-  max-idle-conns: 10
-  max-open-conns: 100
-  log-mode: error
-  log-zap: false
-
-
-mysql_taiwan_billing:
-  path: 127.0.0.1
-  port: "33062"
-  config: charset=utf8&parseTime=True&loc=Local
-  db-name: taiwan_billing
-  username: root
-  password: "88888888"
-  prefix: ""
-  singular: false
-  engine: ""
-  max-idle-conns: 10
-  max-open-conns: 100
-  log-mode: error
-  log-zap: false
+  #  路由全局前缀
+  router-prefix: ""
 
 mysql_system:
-  path: 127.0.0.1
-  port: "33062"
+  path: localhost
+  port: "3306"
   config: charset=utf8mb4&parseTime=True&loc=Local
-  db-name: eto_system
+  db-name: gra
   username: root
-  password: "88888888"
+  password: ""
   prefix: ""
   singular: false
   engine: ""
@@ -95,7 +22,7 @@ mysql_system:
 
 zap:
   level: info
-  prefix: "[github.com/yaoyaochil/dnf_client_Gra]"
+  prefix: "[github.com/yaoyaochil/gin-react-admin]"
   format: console
   director: log
   encode-level: LowercaseColorLevelEncoder
@@ -108,4 +35,4 @@ jwt:
   signing-key: 53fff5b5-4d84-464a-bbe1-d955cd2cd714
   expires-time: 7d
   buffer-time: 1d
-  issuer: eto-system-server
+  issuer: yaoyaochil
