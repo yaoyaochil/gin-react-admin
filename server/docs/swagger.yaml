@@ -17,11 +17,15 @@ definitions:
         type: integer
       index:
         type: boolean
+      keepAlive:
+        type: boolean
       keyword:
         description: 关键字
         type: string
       label:
         type: string
+      orderNum:
+        type: integer
       page:
         description: 页码
         type: integer
@@ -85,8 +89,12 @@ definitions:
         type: integer
       index:
         type: boolean
+      keepAlive:
+        type: boolean
       label:
         type: string
+      orderNum:
+        type: integer
       parent:
         $ref: '#/definitions/system.Menu'
       parentId:
@@ -151,7 +159,7 @@ paths:
       consumes:
       - application/json
       parameters:
-      - description: api路径, api中文描述, api组, 方法
+      - description: ID,路由path,路由组件,是否首页,路由名称,路由图标,父菜单ID,是否缓存,排序
         in: body
         name: data
         required: true
@@ -179,7 +187,7 @@ paths:
       consumes:
       - application/json
       parameters:
-      - description: api路径, api中文描述, api组, 方法
+      - description: ID
         in: body
         name: data
         required: true
@@ -207,7 +215,7 @@ paths:
       consumes:
       - application/json
       parameters:
-      - description: api路径, api中文描述, api组, 方法
+      - description: 提供的id数组
         in: body
         name: data
         required: true
@@ -237,7 +245,7 @@ paths:
       consumes:
       - application/json
       parameters:
-      - description: api路径, api中文描述, api组, 方法
+      - description: ID
         in: body
         name: data
         required: true
@@ -265,7 +273,7 @@ paths:
       consumes:
       - application/json
       parameters:
-      - description: api路径, api中文描述, api组, 方法
+      - description: PageSize,Page
         in: body
         name: data
         required: true
@@ -301,7 +309,7 @@ paths:
       consumes:
       - application/json
       parameters:
-      - description: api路径, api中文描述, api组, 方法
+      - description: ID,路由path,路由组件,是否首页,路由名称,路由图标,父菜单ID,是否缓存,排序
         in: body
         name: data
         required: true

@@ -97,7 +97,7 @@ const docTemplate = `{
                 "summary": "创建菜单",
                 "parameters": [
                     {
-                        "description": "api路径, api中文描述, api组, 方法",
+                        "description": "ID,路由path,路由组件,是否首页,路由名称,路由图标,父菜单ID,是否缓存,排序",
                         "name": "data",
                         "in": "body",
                         "required": true,
@@ -147,7 +147,7 @@ const docTemplate = `{
                 "summary": "根据id删除菜单",
                 "parameters": [
                     {
-                        "description": "api路径, api中文描述, api组, 方法",
+                        "description": "ID",
                         "name": "data",
                         "in": "body",
                         "required": true,
@@ -197,7 +197,7 @@ const docTemplate = `{
                 "summary": "批量删除菜单",
                 "parameters": [
                     {
-                        "description": "api路径, api中文描述, api组, 方法",
+                        "description": "提供的id数组",
                         "name": "data",
                         "in": "body",
                         "required": true,
@@ -250,7 +250,7 @@ const docTemplate = `{
                 "summary": "获取单个菜单",
                 "parameters": [
                     {
-                        "description": "api路径, api中文描述, api组, 方法",
+                        "description": "ID",
                         "name": "data",
                         "in": "body",
                         "required": true,
@@ -300,7 +300,7 @@ const docTemplate = `{
                 "summary": "分页获取菜单",
                 "parameters": [
                     {
-                        "description": "api路径, api中文描述, api组, 方法",
+                        "description": "PageSize,Page",
                         "name": "data",
                         "in": "body",
                         "required": true,
@@ -362,7 +362,7 @@ const docTemplate = `{
                 "summary": "根据id更新菜单",
                 "parameters": [
                     {
-                        "description": "api路径, api中文描述, api组, 方法",
+                        "description": "ID,路由path,路由组件,是否首页,路由名称,路由图标,父菜单ID,是否缓存,排序",
                         "name": "data",
                         "in": "body",
                         "required": true,
@@ -485,12 +485,18 @@ const docTemplate = `{
                 "index": {
                     "type": "boolean"
                 },
+                "keepAlive": {
+                    "type": "boolean"
+                },
                 "keyword": {
                     "description": "关键字",
                     "type": "string"
                 },
                 "label": {
                     "type": "string"
+                },
+                "orderNum": {
+                    "type": "integer"
                 },
                 "page": {
                     "description": "页码",
@@ -584,8 +590,14 @@ const docTemplate = `{
                 "index": {
                     "type": "boolean"
                 },
+                "keepAlive": {
+                    "type": "boolean"
+                },
                 "label": {
                     "type": "string"
+                },
+                "orderNum": {
+                    "type": "integer"
                 },
                 "parent": {
                     "$ref": "#/definitions/system.Menu"

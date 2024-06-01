@@ -19,7 +19,7 @@ var sysMenuService = service.GroupServiceApp.SystemServiceGroup.MenuService
 // @Security  ApiKeyAuth
 // @accept    application/json
 // @Produce   application/json
-// @Param     data  body system.Menu true  "api路径, api中文描述, api组, 方法"
+// @Param     data  body system.Menu true  "ID"
 // @Success   200   {object}  response.Response{msg=string}  "获取成功"
 // @Router    /menu/getMenuById [post]
 func (s *SysMenuApi) GetMenuById(c *gin.Context) {
@@ -43,7 +43,7 @@ func (s *SysMenuApi) GetMenuById(c *gin.Context) {
 // @Security  ApiKeyAuth
 // @accept    application/json
 // @Produce   application/json
-// @Param     data  body request.GetMenuList true  "api路径, api中文描述, api组, 方法"
+// @Param     data  body request.GetMenuList true  "PageSize,Page"
 // @Success   200   {object}  response.PageResult{List=[]interface{}, Total=int64, Page=int, PageSize=int}  "获取成功"
 // @Router    /menu/getMenuList [post]
 func (s *SysMenuApi) GetMenuList(c *gin.Context) {
@@ -72,7 +72,7 @@ func (s *SysMenuApi) GetMenuList(c *gin.Context) {
 // @Security  ApiKeyAuth
 // @accept    application/json
 // @Produce   application/json
-// @Param     data  body system.Menu true  "api路径, api中文描述, api组, 方法"
+// @Param     data  body system.Menu true  "ID,路由path,路由组件,是否首页,路由名称,路由图标,父菜单ID,是否缓存,排序"
 // @Success   200   {object}  response.Response{msg=string}  "创建成功"
 // @Router    /menu/createMenu [post]
 func (s *SysMenuApi) CreateMenu(c *gin.Context) {
@@ -96,7 +96,7 @@ func (s *SysMenuApi) CreateMenu(c *gin.Context) {
 // @Security  ApiKeyAuth
 // @accept    application/json
 // @Produce   application/json
-// @Param     data  body system.Menu true  "api路径, api中文描述, api组, 方法"
+// @Param     data  body system.Menu true  "ID,路由path,路由组件,是否首页,路由名称,路由图标,父菜单ID,是否缓存,排序"
 // @Success   200   {object}  response.Response{msg=string}  "更新成功"
 // @Router    /menu/updateMenuById [post]
 func (s *SysMenuApi) UpdateMenuById(c *gin.Context) {
@@ -120,7 +120,7 @@ func (s *SysMenuApi) UpdateMenuById(c *gin.Context) {
 // @Security  ApiKeyAuth
 // @accept    application/json
 // @Produce   application/json
-// @Param     data  body system.Menu true  "api路径, api中文描述, api组, 方法"
+// @Param     data  body system.Menu true  "ID"
 // @Success   200   {object}  response.Response{msg=string}  "删除成功"
 // @Router    /menu/deleteMenuById [post]
 func (s *SysMenuApi) DeleteMenuById(c *gin.Context) {
@@ -144,7 +144,7 @@ func (s *SysMenuApi) DeleteMenuById(c *gin.Context) {
 // @Security  ApiKeyAuth
 // @accept    application/json
 // @Produce   application/json
-// @Param     data  body []uint true  "api路径, api中文描述, api组, 方法"
+// @Param     data  body []uint true  "提供的id数组"
 // @Success   200   {object}  response.Response{msg=string}  "删除成功"
 // @Router    /menu/deleteMenuByIds [post]
 func (s *SysMenuApi) DeleteMenuByIds(c *gin.Context) {
