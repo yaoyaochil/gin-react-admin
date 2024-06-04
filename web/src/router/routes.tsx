@@ -31,7 +31,7 @@ export default function RouterComponent() {
         const routeList: RouteObject[] = [];
         router.forEach((item) => {
             const element = item.keepAlive
-                ? <KeepAlive id={String(item.ID)} alive={item.keepAlive}>{createComponent(item.element as string)}</KeepAlive>
+                ? <KeepAlive id={String(item.ID)} alive={item.keepAlive} className={'w-full h-full'}>{createComponent(item.element as string)}</KeepAlive>
                 : createComponent(item.element as string);
 
             if (item.children && item.children.length > 0) {
@@ -94,7 +94,7 @@ export default function RouterComponent() {
 
     return (
         <div className={"w-screen h-screen"}>
-            <RouterProvider router={routes}/>
+            <RouterProvider router={routes} />
         </div>
     )
 }

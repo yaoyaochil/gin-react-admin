@@ -11,7 +11,7 @@ export default function FloatButtonComponent() {
                 position: 'fixed',
                 right: 50,
                 bottom: 100,
-            }} open={floatButtonVisible} onClick={()=> setFloatButtonVisible(!floatButtonVisible)} icon={<SettingOutlined spin />} trigger="click">
+            }} open={floatButtonVisible} onClick={()=> setFloatButtonVisible(!floatButtonVisible)} icon={<SettingOutlined />} trigger="click">
                 <FloatButton
                     icon={<GithubOutlined/>}
                     onClick={() => window.open('https://github.com/yaoyaochil/gin-react-admin')}
