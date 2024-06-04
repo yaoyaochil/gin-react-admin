@@ -14,6 +14,7 @@ type Menu struct {
 	Children  []Menu `json:"children" gorm:"foreignKey:ParentId"`
 	KeepAlive bool   `json:"keepAlive" gorm:"comment:是否缓存;default:false"`
 	OrderNum  int    `json:"orderNum" gorm:"comment:排序;default:0"`
+	Hidden    bool   `json:"hidden" gorm:"comment:是否隐藏;default:false"`
 }
 
 func (m *Menu) TableName() string {

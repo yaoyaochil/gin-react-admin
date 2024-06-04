@@ -12,7 +12,8 @@ type FormItem = {
 }
 
 export default function Login() {
-    const setUser = useUserStore().setState;
+    const setUser = useUserStore((state) => state.setUserInfo);
+    const setToken = useUserStore((state) => state.setToken);
     const router = useNavigate();
 
     const getMenuData = async () => {
@@ -46,18 +47,13 @@ export default function Login() {
         const {username, password} = values;
         const res = await login({username, password});
         if (res.code === 0) {
-            setUser({
-                token: res.data.token,
-                userInfo: res.data.user
-            });
-            console.log(useUserStore().getState().token)
-            if (useUserStore().getState().token) {
-                getMenuData().then(() => {
-                    message.success('登录成功');
-                }).catch(() => {
-                    message.error('登录失败');
-                })
-            }
+            setUser(res.data.user);
+            setToken(res.data.token);
+            getMenuData().then(() => {
+                message.success('登录成功');
+            }).catch(() => {
+                message.error('登录失败');
+            })
         }
     }
 

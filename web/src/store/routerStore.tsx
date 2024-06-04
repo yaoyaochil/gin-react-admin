@@ -11,7 +11,9 @@ export interface RouterType {
     label?: string;
     icon?: string;
     orderNum?: number;
+    parentId?: number;
     keepAlive?: boolean; // 添加 keepAlive 字段
+    hidden?: boolean; // 添加 hidden 字段
 }
 
 

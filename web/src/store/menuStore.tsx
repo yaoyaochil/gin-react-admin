@@ -35,23 +35,25 @@ export function formatMenu(menu: RouterType[]): MenuItem[] {
         if (item.path === '/layout') {
             item.children?.forEach((child) => {
                 // 如果有子路由 则显示在子菜单中
-                if (child.children?.length === 0) {
+                if (child.children?.length === 0 && !child.hidden) {
                     menuItems.push({
                         key: child.path,
                         label: child.label,
                         icon: createIcon(child.icon),
                     });
                 } else {
-                    menuItems.push({
-                        key: child.path,
-                        label: child.label,
-                        icon: createIcon(child.icon),
-                        children: child.children?.map((subChild) => ({
-                            key: subChild.path,
-                            label: subChild.label,
-                            icon: createIcon(subChild.icon),
-                        })),
-                    });
+                    if (!child.hidden) {
+                        menuItems.push({
+                            key: child.path,
+                            label: child.label,
+                            icon: createIcon(child.icon),
+                            children: child.children?.map((subChild) => ({
+                                key: subChild.path,
+                                label: subChild.label,
+                                icon: createIcon(subChild.icon),
+                            })),
+                        });
+                    }
                 }
             });
         }

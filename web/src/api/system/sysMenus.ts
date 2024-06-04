@@ -13,3 +13,27 @@ export const getMenuList = (data:{page:number, pageSize:number}) :Promise<BaseRe
         data
     })
 }
+
+/**
+ * 新增菜单
+ * @param data {RouterType}
+ */
+export const createMenu = (data:RouterType) :Promise<BaseResponse<null>> => {
+    return service({
+        url: '/menu/createMenu',
+        method: 'post',
+        data
+    })
+}
+
+/**
+ * 编辑菜单
+ * @param data {RouterType}
+ */
+export const updateMenu = (data:RouterType) :Promise<BaseResponse<null>> => {
+    return service({
+        url: '/menu/updateMenu',
+        method: 'post',
+        data
+    })
+}

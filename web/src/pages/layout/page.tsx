@@ -24,33 +24,41 @@ import {findPathLabels} from "@/utils/format.ts";
 
 
 const { Header, Sider, Content,Footer } = Layout;
-const DropdownMenu:MenuProps['items'] = [
-    {
-        key: '1',
-        icon: <GithubOutlined />,
-        label: 'Github',
-    },
-    {
-        key: '2',
-        icon: <UserOutlined />,
-        label: '个人中心',
-    },
-    {
-        key: '3',
-        icon: <PoweroffOutlined />,
-        label: '退出登录',
-        danger: true,
-    }
-] as MenuProps['items'];
+
 export default function LayoutPage() {
     const [collapsed, setCollapsed] = useState(false);
     const token = useUserStore((state) => state.token);
     const user = useUserStore((state) => state.userInfo);
+    const userStore = useUserStore();
     const [breadcrumb, setBreadcrumb] = useState<ItemType[]>([]);
     const router = useNavigate();
     const {
         token: { colorBgContainer },
     } = theme.useToken();
+
+
+    const DropdownMenu:MenuProps['items'] = [
+        {
+            key: '1',
+            icon: <GithubOutlined />,
+            label: 'Github',
+        },
+        {
+            key: '2',
+            icon: <UserOutlined />,
+            label: '个人中心',
+        },
+        {
+            key: '3',
+            icon: <PoweroffOutlined />,
+            label: '退出登录',
+            danger: true,
+            onClick: () => {
+                userStore.Logout();
+            }
+        }
+    ] as MenuProps['items'];
+
 
     useEffect(() => {
         // 根据useRouterStore中的router生成面包屑
