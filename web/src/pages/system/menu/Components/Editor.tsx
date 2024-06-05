@@ -44,11 +44,41 @@ export default function MenuEditor(props: MenuEditorProps) {
                 break;
         }
     }
-    const displayRender = (labels: string[]) => labels[labels.length - 1];
+
+
+    const findLabelById = (items: RouterType[],id:number):RouterType | undefined => {
+        for (const item of items) {
+            if (item.ID === id) {
+                return item
+            } else if (item.children) {
+                const found = findLabelById(item.children, id);
+                if (found) {
+                    return found
+                }
+            }
+        }
+        return undefined
+    }
+
+    // 自定义Cascade显示 用ID查找正确的label
+    const displayRender = (labels:string[]) => {
+        if (props.type === 'add' && props.data?.ID === 0) {
+            return ['根节点']
+        }
+        let replaceLabels = labels
+        labels.forEach((label) => {
+            if (typeof label === 'number') {
+                const labelText = findLabelById(menuData,label)?.label;
+                if (labelText) {
+                    replaceLabels = [labelText]
+                }
+            }
+        })
+        return replaceLabels
+    }
 
     useEffect(() => {
         if (props.data && props.type === 'add') {
-            console.log(props.data)
             form.setFieldValue('parentId', props.data.ID)
         }
         if (props.data && props.type === 'edit') {
@@ -88,20 +118,25 @@ export default function MenuEditor(props: MenuEditorProps) {
                     <Form.Item<RouterType> label={'路由'} name={'path'} rules={[{required:true,message:'请输入路由'}]}>
                         <Input type="text"/>
                     </Form.Item>
-                    <Form.Item<RouterType> label={'父节点ID'} name={'parentId'}>
-                        <Cascader
-                            options={menuData}
-                            fieldNames={{label: 'label', value: 'ID'}}
-                            changeOnSelect
-                            expandTrigger="hover"
-                            displayRender={displayRender}
-                            onChange={(e) => {
-                                if (e.length > 0) {
-                                    form.setFieldValue('parentId', e[e.length - 1])
-                                }
-                            }}
-                        />
-                    </Form.Item>
+                    {
+                        props.type === 'add' && props.data?.ID !== 0 || props.type === 'edit' && (
+                            <Form.Item<RouterType> label={'父节点ID'} name={'parentId'}>
+                                <Cascader
+                                    options={menuData}
+                                    fieldNames={{label: 'label', value: 'ID'}}
+                                    changeOnSelect
+                                    expandTrigger="hover"
+                                    displayRender={displayRender}
+                                    onClear={() => form.setFieldValue('parentId', 0)}
+                                    onChange={(e) => {
+                                        if (e.length > 0) {
+                                            form.setFieldValue('parentId', e[e.length - 1])
+                                        }
+                                    }}
+                                />
+                            </Form.Item>
+                        )
+                    }
                     <Form.Item<RouterType> label={'隐藏'} name={'hidden'} initialValue={false}>
                         <Select>
                             <Select.Option value={true}>是</Select.Option>

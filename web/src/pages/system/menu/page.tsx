@@ -8,9 +8,6 @@ import {getColumns} from "@/pages/system/menu/types/Table.tsx";
 
 export default function SysMenu() {
     const [data, setData] = useState<RouterType[]>([]);
-    const [page, setPage] = useState(1);
-    const [pageSize, setPageSize] = useState(10);
-    const [total, setTotal] = useState(0);
     const [visible, setVisible] = useState(false);
     const [editData, setEditData] = useState<RouterType | undefined>(undefined);
     const [editType, setEditType] = useState<'add' | 'edit'>('add');
@@ -20,14 +17,28 @@ export default function SysMenu() {
 
     // 获取菜单列表
     const getData = async () => {
-        const res = await getMenuList({ page: page, pageSize: pageSize });
+        const res = await getMenuList({ page: 1, pageSize: 999 });
         if (res.code === 0) {
             setData(res.data.list);
-            setTotal(res.data.total);
             return;
         }
         message.error('获取菜单列表失败');
     };
+
+    const addRootMenu = () => {
+        setEditData({
+            ID: 0,
+            label: '',
+            path: '',
+            icon: '',
+            hidden: false,
+            parentId: 0,
+            orderNum: 0,
+            children: []
+        });
+        setEditType('add');
+        setVisible(true);
+    }
 
 
     useEffect(() => {
@@ -51,13 +62,13 @@ export default function SysMenu() {
     // 当page或pageSize变化时，重新获取数据
     useEffect(() => {
         getData();
-    }, [page, pageSize]);
+    }, []);
 
     return (
         <div className={'w-full h-full bg-white flex flex-col gap-3 p-4 rounded'}>
             <MenuEditor type={editType} data={editData} open={visible} onCanceled={()=>setVisible(false)} />
             <div>
-                <Button type={'primary'}>新增根菜单</Button>
+                <Button type={'primary'} onClick={addRootMenu}>新增根菜单</Button>
             </div>
             <div ref={TableRef} className={'flex-1 w-full'}>
                 <Table
@@ -74,16 +85,7 @@ export default function SysMenu() {
                             return !!(record.children && record.children.length > 0);
                         }
                     }}
-                    pagination={{
-                        current: page,
-                        pageSize: pageSize,
-                        total: total,
-                        showTotal: (total) => `共${total}条`,
-                        onChange: (page, pageSize) => {
-                            setPage(page);
-                            setPageSize(pageSize);
-                        }
-                    }}
+                    pagination={false}
                 />
             </div>
         </div>

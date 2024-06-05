@@ -1,6 +1,8 @@
 package system
 
-import "github.com/yaoyaochil/gin-react-admin/global"
+import (
+	"github.com/yaoyaochil/gin-react-admin/global"
+)
 
 type Menu struct {
 	global.GraMODEL

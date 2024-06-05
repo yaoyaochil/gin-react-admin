@@ -37,3 +37,16 @@ export const updateMenu = (data:RouterType) :Promise<BaseResponse<null>> => {
         data
     })
 }
+
+
+/**
+ * 删除菜单
+ * @param data {id:number}
+ */
+export const deleteMenu = (data:{id:number}) :Promise<BaseResponse<null>> => {
+    return service({
+        url: '/menu/deleteMenu',
+        method: 'post',
+        data
+    })
+}
