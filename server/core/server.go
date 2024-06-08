@@ -30,7 +30,7 @@ func RunWindowsServer() {
 	// In order to ensure that the text order output can be deleted
 	time.Sleep(10 * time.Microsecond)
 
-	fmt.Printf(`ETO网关服务启动成功%s 
+	fmt.Printf(`GRA服务启动成功%s 
 `, address)
 	global.GraLog.Error(s.ListenAndServe().Error())
 }
